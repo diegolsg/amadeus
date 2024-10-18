@@ -2,6 +2,7 @@ package com.amadeus.horas_extras.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,10 +15,10 @@ import java.time.LocalDateTime;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "horas")
+@Table(name = "horas_extras")
 
 public class ExtraHours {
-
+    @Id
     private int id;
    @Column(name = "horainicio")
     private LocalDateTime startHours ;
@@ -27,20 +28,22 @@ public class ExtraHours {
     private Double dayTimeHours;
    @Column(name = "horanocturna")
     private Double nightTimeHours;
-   @Column(name = "hora")
+   @Column(name = "horaDiurnaFestiva")
     private Double dayHolidayHours;
-   @Column(name = "")
+   @Column(name = "horaNocturnaFestiva")
     private Double nightHolidayHours;
-   @Column(name = "")
+   @Column(name = "valorHoraDiurna")
     private BigDecimal valuedayhours;
-   @Column(name = "")
+   @Column(name = "ValorHoraNocturna")
     private BigDecimal valuenighthours;
-   @Column(name = "")
+   @Column(name = "ValorHoraFestivaDiurna")
     private BigDecimal valueDayHollidayHours;
-   @Column(name = "")
+   @Column(name = "valorHoraFestivaNocturna")
     private BigDecimal valueNightHolidayHours;
-   @Column(name = "")
+   @Column(name = "valorDia")
     private BigDecimal valueday;
+   @Column(name = "totalDeHoras")
+    private Float totalHours;
 
 
 }

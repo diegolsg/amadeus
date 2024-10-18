@@ -1,4 +1,4 @@
-package com.amadeus.horas_extras.entity;
+package com.amadeus.horas_extras.adapter.daos.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

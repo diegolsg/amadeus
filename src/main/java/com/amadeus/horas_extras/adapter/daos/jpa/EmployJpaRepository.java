@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface EmployJpaRepository extends JpaRepository<Employ,String> {
     List<Employ> findByDocument(String document);
+
 }

@@ -1,13 +1,15 @@
 package com.amadeus.horas_extras.adapter.daos.mapper;
 
 import com.amadeus.horas_extras.adapter.daos.entity.Employ;
+import com.amadeus.horas_extras.domain.model.EmployModel;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.springframework.web.bind.annotation.Mapping;
+
 
 @Mapper
-public interface ExtraHoursMappers {
+public interface EmployMappers {
       @Mappings({
               @Mapping(source = "document", target = "document"),
               @Mapping(source = "name", target = "name"),
@@ -19,5 +21,5 @@ public interface ExtraHoursMappers {
               @Mapping(source = "area", target = "area")})
       Employ toEmployModels(EmployModel employModel);
      @InheritInverseConfiguration
-      EmployModel fromEmploy(Employ employ);
+     EmployModel fromEmploy(Employ employ);
 }

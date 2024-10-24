@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -34,4 +35,9 @@ public class Employ {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employs")
     private List<ExtraHours> extraHours;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Boss boss;
+
+
 }

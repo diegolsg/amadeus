@@ -42,8 +42,11 @@ public class ExtraHours {
     private BigDecimal valueday;
    @Column(name = "totalDeHoras")
     private Float totalHours;
+   @Column(name="observaciones")
+   private String observaciones;
    @ManyToOne(fetch = FetchType.LAZY)
     private Employ employs;
+
 
 
 }

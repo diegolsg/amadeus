@@ -1,6 +1,7 @@
 package com.amadeus.horas_extras.adapter.daos.mapper;
 
-import com.amadeus.horas_extras.entity.Boss;
+
+import com.amadeus.horas_extras.adapter.daos.entity.Boss;
 import com.amadeus.horas_extras.domain.model.BossModel;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -24,6 +25,6 @@ public interface BossMappers {
     })
     Boss toBossModels(BossModel bossModel);
     @InheritInverseConfiguration
-    BossModel fromEmploy(com.amadeus.horas_extras.entity.Boss boss);
+    BossModel fromEmploy(Boss boss);
     List<BossModel> toBossModels(List<Boss> bosses);
 }

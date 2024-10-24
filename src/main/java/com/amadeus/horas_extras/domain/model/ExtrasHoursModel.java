@@ -24,6 +24,7 @@ public class ExtrasHoursModel {
     private BigDecimal valueDayHollidayHours;
     private BigDecimal valueNightHolidayHours;
     private BigDecimal valueday;
-    private Float totalHours;
+    private Double totalHours;
+    private String observation;
 
 }

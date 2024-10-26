@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface EmployJpaRepository extends JpaRepository<Employ,String> {
-    List<Employ> findByDocument(String document);
+    Employ findByDocument(String document);
 }

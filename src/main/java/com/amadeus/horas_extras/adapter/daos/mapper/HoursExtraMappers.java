@@ -1,7 +1,9 @@
 package com.amadeus.horas_extras.adapter.daos.mapper;
 
+import com.amadeus.horas_extras.adapter.daos.entity.Boss;
 import com.amadeus.horas_extras.adapter.daos.entity.Employ;
 import com.amadeus.horas_extras.adapter.daos.entity.ExtraHours;
+import com.amadeus.horas_extras.domain.model.BossModel;
 import com.amadeus.horas_extras.domain.model.EmployModel;
 import com.amadeus.horas_extras.domain.model.ExtrasHoursModel;
 import org.mapstruct.InheritInverseConfiguration;
@@ -9,8 +11,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
 
-@Mapper
+
+@Mapper(componentModel = "spring")
 public interface HoursExtraMappers {
     @Mappings({
             @Mapping(source = "startHours",target = "startHours"),
@@ -27,6 +31,6 @@ public interface HoursExtraMappers {
             @Mapping(source = "totalHours",target = "totalHours")})
     ExtraHours toExtraHoursModels(ExtrasHoursModel extrasHoursModel);
     @InheritInverseConfiguration
-    ExtrasHoursModel fromEmploy(ExtraHours extraHours);
-
+    ExtrasHoursModel fromExtraHours(ExtraHours extraHours);
+    List<ExtrasHoursModel> toExtraHoursModel(List<ExtraHours> extraHoursList);
 }

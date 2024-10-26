@@ -1,6 +1,9 @@
 package com.amadeus.horas_extras.domain.model;
 
 
+import com.amadeus.horas_extras.adapter.daos.entity.Employ;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ExtrasHoursModel {
 
+    private int id;
     private LocalDateTime startHours ;
     private LocalDateTime endHours ;
     private Double dayTimeHours;
@@ -25,5 +29,6 @@ public class ExtrasHoursModel {
     private BigDecimal valueday;
     private Double totalHours;
     private String observation;
+
 
 }

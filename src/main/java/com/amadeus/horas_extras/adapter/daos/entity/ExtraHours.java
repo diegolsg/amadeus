@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class ExtraHours {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
    @Column(name = "horainicio")
     private LocalDateTime startHours ;
    @Column(name = "horafin")

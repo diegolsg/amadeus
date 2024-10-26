@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface EmployMappers {
       @Mappings({
               @Mapping(source = "document", target = "document"),

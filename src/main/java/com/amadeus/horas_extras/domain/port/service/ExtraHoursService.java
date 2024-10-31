@@ -1,5 +1,6 @@
 package com.amadeus.horas_extras.domain.port.service;
 
+import com.amadeus.horas_extras.adapter.api.dtos.ExtraHoursDto;
 import com.amadeus.horas_extras.adapter.daos.mapper.HoursExtraMappers;
 import com.amadeus.horas_extras.adapter.daos.repositoryImp.ExtraHoursRepositoryImp;
 import com.amadeus.horas_extras.domain.model.ExtrasHoursModel;
@@ -22,7 +23,7 @@ public class ExtraHoursService {
     }
 
     // Guardar horas extras
-    public ExtrasHoursModel saveHours(ExtrasHoursModel extraHours) {
+    public ExtrasHoursModel saveHours(ExtraHoursDto extraHours) {
         return extraHoursRepository.saveHours(extraHours);
     }
 

@@ -1,5 +1,6 @@
 package com.amadeus.horas_extras.adapter.api.controller;
 
+import com.amadeus.horas_extras.adapter.api.dtos.ExtraHoursDto;
 import com.amadeus.horas_extras.domain.model.ExtrasHoursModel;
 import com.amadeus.horas_extras.domain.port.service.ExtraHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class ExtraHoursController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ExtrasHoursModel> saveHours(@RequestBody ExtrasHoursModel extraHours) {
-        ExtrasHoursModel savedHours = extraHoursService.saveHours(extraHours);
-        return new ResponseEntity<>(savedHours, HttpStatus.CREATED);
+    public ResponseEntity<ExtrasHoursModel> saveExtraHours(@RequestBody ExtraHoursDto request) {
+        ExtrasHoursModel savedModel = extraHoursService.saveHours(request);
+        return new ResponseEntity<>(savedModel, HttpStatus.CREATED);
     }
 
     @PutMapping("/actualizar")

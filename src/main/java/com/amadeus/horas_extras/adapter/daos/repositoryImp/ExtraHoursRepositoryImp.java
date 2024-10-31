@@ -1,6 +1,9 @@
 package com.amadeus.horas_extras.adapter.daos.repositoryImp;
 
+import com.amadeus.horas_extras.adapter.api.dtos.ExtraHoursDto;
+import com.amadeus.horas_extras.adapter.daos.entity.Employ;
 import com.amadeus.horas_extras.adapter.daos.entity.ExtraHours;
+import com.amadeus.horas_extras.adapter.daos.jpa.EmployJpaRepository;
 import com.amadeus.horas_extras.adapter.daos.jpa.HoursJpaRepository;
 import com.amadeus.horas_extras.adapter.daos.mapper.HoursExtraMappers;
 import com.amadeus.horas_extras.domain.model.ExtrasHoursModel;
@@ -15,12 +18,23 @@ import java.util.List;
 public class ExtraHoursRepositoryImp implements ExtraHoursRepository {
 
     private HoursJpaRepository hoursJpaRepository;
+    private EmployJpaRepository employRepository;
     private HoursExtraMappers mappers;
+    private CalculateHours calculateHours;
     @Autowired
-    public ExtraHoursRepositoryImp(HoursJpaRepository hoursJpaRepository, HoursExtraMappers mappers) {
+    public ExtraHoursRepositoryImp(HoursJpaRepository hoursJpaRepository,
+                                   EmployJpaRepository employRepository,
+                                   HoursExtraMappers mappers,
+                                   CalculateHours calculateHours) {
         this.hoursJpaRepository = hoursJpaRepository;
+        this.employRepository = employRepository;
         this.mappers = mappers;
+        this.calculateHours = calculateHours;
     }
+
+
+    
+  
 
     public List<ExtrasHoursModel> getHoursByDate(LocalDateTime startDate, LocalDateTime endDate){
         return  mappers.toExtraHoursModel(hoursJpaRepository.findByStartHoursBetween(startDate,endDate));
@@ -34,11 +48,22 @@ public class ExtraHoursRepositoryImp implements ExtraHoursRepository {
     public List<ExtrasHoursModel> getAllHours() {
         return mappers.toExtraHoursModel(hoursJpaRepository.findAll());
     }
+    @Transactional
+    public ExtrasHoursModel saveHours(ExtraHoursDto extraHoursDto) {
+        String document = extraHoursDto.getDocumentEmploy();
+        Employ employ = employRepository.findByDocument(document)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Empleado no encontrado con documento: " + document));
 
-    public ExtrasHoursModel saveHours(ExtrasHoursModel extraHours) {
-        ExtraHours entity = mappers.toExtraHoursModels(extraHours);
+
+        ExtraHours entity = new ExtraHours();
+        entity.setStartHours(extraHoursDto.getStartHours());
+        entity.setEndHours(extraHoursDto.getEndHours());
+        entity.setDayTimeHours(calculateHours.dayTimeHours(extraHoursDto.getStartHours(),extraHoursDto.getEndHours()));
         ExtraHours savedEntity = hoursJpaRepository.save(entity);
+
         return mappers.fromExtraHours(savedEntity);
+
     }
 
 
@@ -53,14 +78,14 @@ public class ExtraHoursRepositoryImp implements ExtraHoursRepository {
     @Override
     public ExtrasHoursModel updateHours(ExtrasHoursModel extraHours) {
 
-        ExtraHours existing = hoursJpaRepository.findById(extraHours.getId())
+            ExtraHours existing = hoursJpaRepository.findById(extraHours.getId())
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Horas extras no encontradas con ID: " + extraHours.getId()));
 
-        existing.setStartHours(extraHours.getStartHours());
+             existing.setStartHours(extraHours.getStartHours());
         existing.setEndHours(extraHours.getEndHours());
 
-        ExtraHours updatedEntity = hoursJpaRepository.save(existing);
+           ExtraHours updatedEntity = hoursJpaRepository.save(existing);
         return mappers.fromExtraHours(updatedEntity);
     }
 }

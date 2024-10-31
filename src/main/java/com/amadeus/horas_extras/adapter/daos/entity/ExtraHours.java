@@ -47,6 +47,4 @@ public class ExtraHours {
    @ManyToOne(fetch = FetchType.LAZY)
     private Employ employs;
 
-
-
 }

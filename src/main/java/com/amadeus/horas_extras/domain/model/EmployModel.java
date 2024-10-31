@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 public class EmployModel {
     private String document;
     private String name;
-    private String lastname;
-    private String mail;
+    private String lastName;
+    private String email;
     private String numberTelephone;
     private String position;
     private BigDecimal salary;

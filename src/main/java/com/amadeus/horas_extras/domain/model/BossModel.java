@@ -12,8 +12,8 @@ import java.time.LocalDate;
 
 public class BossModel {
     private String name;
-    private String lastname;
-    private String mail;
+    private String lastName;
+    private String email;
     private String numberTelephone;
     private String user;
     private String password;

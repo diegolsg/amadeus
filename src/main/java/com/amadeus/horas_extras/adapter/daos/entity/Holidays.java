@@ -10,7 +10,7 @@ public class Holidays {
     private int id;
     private LocalDate date;
 
-    @ManyToOne(FetchType.LAZY)
-    private ConfigHours configHours,
+    @ManyToOne(fetch=FetchType.LAZY)
+    private ConfigHours configHours;
 
 }

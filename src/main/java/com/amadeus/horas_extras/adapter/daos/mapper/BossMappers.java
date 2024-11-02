@@ -18,10 +18,12 @@ public interface BossMappers {
             @Mapping(source = "lastName",target = "lastName"),
             @Mapping(source = "email",target = "email"),
             @Mapping(source = "numberTelephone",target = "numberTelephone"),
+            @Mapping(source = "area",target = "area"),
             @Mapping(source = "user",target = "user"),
             @Mapping(source = "password",target = "password"),
             @Mapping(source = "createDate",target = "createDate"),
             @Mapping(source = "updateDate",target = "updateDate")
+
     })
     Boss toBossModels(BossModel bossModel);
     @InheritInverseConfiguration

@@ -33,7 +33,10 @@ public class Boss {
     @Column(name = "usuario")
     private String user;
     private String password;
-
+    @Column(name = "fecha_creacion")
+    private LocalDate createDate;
+    @Column(name= "fecha_actualizacion")
+    private LocalDate updateDate;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "boss")
     private List<Employ> employs;
 

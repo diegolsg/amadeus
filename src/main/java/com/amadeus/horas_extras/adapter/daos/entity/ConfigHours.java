@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.List;
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -32,4 +34,10 @@ public class ConfigHours {
     private LocalDate createDate;
     @Column(name= "fecha_actualizacion")
     private LocalDate updateDate;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "holidays")
+    private Holidays holidays;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private ExtraHours extraHours;
 }

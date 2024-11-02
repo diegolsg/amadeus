@@ -30,8 +30,11 @@ public class Boss {
     @Column(name = "numero_telefono")
     private String numberTelephone;
     private String area;
+    @Column(name = "usuario")
+    private String user;
+    private String password;
 
-        @OneToMany(fetch = FetchType.LAZY, mappedBy = "boss")
-        private List<Employ> employs;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "boss")
+    private List<Employ> employs;
 
 }

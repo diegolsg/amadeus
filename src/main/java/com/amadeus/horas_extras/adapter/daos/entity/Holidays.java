@@ -1,8 +1,6 @@
 package com.amadeus.horas_extras.adapter.daos.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -11,4 +9,8 @@ public class Holidays {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalDate date;
+
+    @ManyToOne(FetchType.LAZY)
+    private ConfigHours configHours,
+
 }

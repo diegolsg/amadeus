@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -44,7 +45,11 @@ public class ExtraHours {
     private Float totalHours;
    @Column(name="observaciones")
    private String observaciones;
+
    @ManyToOne(fetch = FetchType.LAZY)
     private Employ employs;
+
+   @OneToOne(fetch = FetchType.LAZY)
+    private ConfigHours configHours;
 
 }

@@ -28,7 +28,7 @@ public class Employ {
     @Column(name = "numero_telefono")
     private String numberTelephone;
     @Column(name = "cargo")
-    private String position;
+    private Position position;
     @Column(name = "salario")
     private BigDecimal salary;
     private String area;

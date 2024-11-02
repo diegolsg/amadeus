@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -42,9 +43,13 @@ public class ExtraHours {
    @Column(name = "valorDia")
     private BigDecimal valueday;
    @Column(name = "totalDeHoras")
-    private Float totalHours;
+    private Float totalHoursValue;
    @Column(name="observaciones")
    private String observaciones;
+    @Column(name = "fecha_creacion")
+    private LocalDate createDate;
+    @Column(name= "fecha_actualizacion")
+    private LocalDate updateDate;
 
    @ManyToOne(fetch = FetchType.LAZY)
     private Employ employs;

@@ -28,7 +28,10 @@ public interface HoursExtraMappers {
             @Mapping(source = "valueDayHollidayHours",target = "valueDayHollidayHours"),
             @Mapping(source = "valueNightHolidayHours",target = "valueNightHolidayHours"),
             @Mapping(source = "valueday",target = "valueday"),
-            @Mapping(source = "totalHours",target = "totalHours")})
+            @Mapping(source = "totalHoursValue",target = "totalHoursValue"),
+            @Mapping(source = "createDate",target = "createDate"),
+            @Mapping(source = "updateDate",target = "updateDate")
+    })
     ExtraHours toExtraHoursModels(ExtrasHoursModel extrasHoursModel);
     @InheritInverseConfiguration
     ExtrasHoursModel fromExtraHours(ExtraHours extraHours);

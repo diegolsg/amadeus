@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -31,7 +32,14 @@ public class Employ {
     private Position position;
     @Column(name = "salario")
     private BigDecimal salary;
+    @Column(name="usuario")
+    private String user;
+    private String password;
     private String area;
+    @Column(name = "fecha_creacion")
+    private LocalDate createDate;
+    @Column(name= "fecha_actualizacion")
+    private LocalDate updateDate;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employs")
     private List<ExtraHours> extraHours;

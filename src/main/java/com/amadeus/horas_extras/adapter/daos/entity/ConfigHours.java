@@ -35,9 +35,6 @@ public class ConfigHours {
     @Column(name= "fecha_actualizacion")
     private LocalDate updateDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "holidays")
-    private Holidays holidays;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private ExtraHours extraHours;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "configHours")
+    private List<Holidays> holidays;
 }

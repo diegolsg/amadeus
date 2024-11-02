@@ -21,12 +21,12 @@ public interface EmployMappers {
               @Mapping(source = "email", target = "email"),
               @Mapping(source = "numberTelephone", target = "numberTelephone"),
               @Mapping(source = "position", target = "position"),
-              @Mapping(source = "user",target = "user"),
-              @Mapping(source = "password",target = "password"),
+              @Mapping(source = "user", target = "user"),
+              @Mapping(source = "password", target = "password"),
               @Mapping(source = "salary", target = "salary"),
               @Mapping(source = "area", target = "area"),
-              @Mapping(source = "createDate",target = "createDate"),
-            //  @Mapping(source = "updateDate",target = "updateDate")
+              @Mapping(source = "createDate", target = "createDate"),
+              @Mapping(source = "updateDate", target = "updateDate")
       })
 
       Employ toEmployModels(EmployModel employModel);

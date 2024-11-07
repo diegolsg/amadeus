@@ -55,14 +55,7 @@ public class ExtraHoursRepositoryImp implements ExtraHoursRepository {
                 .orElseThrow(() ->
                         new IllegalArgumentException("Empleado no encontrado con documento: " + document));
 
-
-        ExtraHours entity = new ExtraHours();
-        entity.setStartHours(extraHoursDto.getStartHours());
-        entity.setEndHours(extraHoursDto.getEndHours());
-        entity.setDayTimeHours(calculateHours.dayTimeHours(extraHoursDto.getStartHours(),extraHoursDto.getEndHours()));
-        ExtraHours savedEntity = hoursJpaRepository.save(entity);
-
-        return mappers.fromExtraHours(savedEntity);
+        return calculateHours.dayTimeHours(extraHoursDto);
 
     }
 

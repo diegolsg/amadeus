@@ -31,7 +31,7 @@ public class Employ {
     @Column(name = "cargo")
     private Position position;
     @Column(name = "salario")
-    private BigDecimal salary;
+    private Double salary;
     @Column(name="usuario")
     private String user;
     private String password;

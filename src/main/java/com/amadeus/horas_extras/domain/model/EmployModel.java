@@ -20,7 +20,7 @@ public class EmployModel {
     private String email;
     private String numberTelephone;
     private Position position;
-    private BigDecimal salary;
+    private Double salary;
     private String user;
     private String password;
     private String area;

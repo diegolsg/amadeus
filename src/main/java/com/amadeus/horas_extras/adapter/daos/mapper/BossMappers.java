@@ -28,5 +28,6 @@ public interface BossMappers {
     Boss toBossModels(BossModel bossModel);
     @InheritInverseConfiguration
     BossModel fromBoss(Boss boss);
-    List<BossModel> toBossModels(List<Boss> bosses);
+    List<BossModel> toBossModelsList(List<Boss> bosses);
+    List<Boss> fromBossList(List<BossModel> bosses);
 }

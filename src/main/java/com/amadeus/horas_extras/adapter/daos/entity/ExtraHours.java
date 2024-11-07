@@ -41,7 +41,7 @@ public class ExtraHours {
    @Column(name = "valorHoraFestivaNocturna")
     private BigDecimal valueNightHolidayHours;
    @Column(name = "valorDia")
-    private BigDecimal valueday;
+    private Double valueday;
    @Column(name = "totalDeHoras")
     private Float totalHoursValue;
    @Column(name="observaciones")

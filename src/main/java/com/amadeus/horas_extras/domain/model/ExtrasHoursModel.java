@@ -27,7 +27,7 @@ public class ExtrasHoursModel {
     private BigDecimal valuenighthours;
     private BigDecimal valueDayHollidayHours;
     private BigDecimal valueNightHolidayHours;
-    private BigDecimal valueday;
+    private Double valueday;
     private Double totalHoursValue;
     private String observation;
     private LocalDate createDate;

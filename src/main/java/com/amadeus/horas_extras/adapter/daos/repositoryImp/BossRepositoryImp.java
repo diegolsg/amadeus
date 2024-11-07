@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Repository
 public class BossRepositoryImp implements BossRepository {
     private BossMappers mappers;
     private BossJpaRepository bossJpa;
+
 
     @Autowired
     public BossRepositoryImp(BossMappers mappers, BossJpaRepository bossJpa) {

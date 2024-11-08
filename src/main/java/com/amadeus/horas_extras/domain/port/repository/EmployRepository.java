@@ -17,7 +17,7 @@ public interface EmployRepository {
 
     EmployModel updateEmploy(EmployModel Employ);
 
-    void deleteEmploy(Long id);
+    void deleteEmploy(String document);
 
     Optional<EmployModel> findByDocument(String documento);
 }

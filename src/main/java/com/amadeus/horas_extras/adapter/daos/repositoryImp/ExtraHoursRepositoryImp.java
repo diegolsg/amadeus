@@ -32,10 +32,6 @@ public class ExtraHoursRepositoryImp implements ExtraHoursRepository {
         this.calculateHours = calculateHours;
     }
 
-
-    
-  
-
     public List<ExtrasHoursModel> getHoursByDate(LocalDateTime startDate, LocalDateTime endDate){
         return  mappers.toExtraHoursModel(hoursJpaRepository.findByStartHoursBetween(startDate,endDate));
     }

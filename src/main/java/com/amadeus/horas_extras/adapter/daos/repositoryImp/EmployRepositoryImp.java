@@ -17,17 +17,17 @@ import java.util.stream.Collectors;
 @Repository
 public class EmployRepositoryImp implements EmployRepository {
     private EmployMappers mappers;
-    private EmployJpaRepository EmployJpa;
+    private EmployJpaRepository employJpa;
 
     @Autowired
     public EmployRepositoryImp(EmployMappers mappers, EmployJpaRepository employJpa) {
         this.mappers = mappers;
-        EmployJpa = employJpa;
+        this.employJpa = employJpa;
     }
 
     @Override
     public List<EmployModel> getEmployes() {
-        List<Employ> EmployEntities = EmployJpa.findAll();
+        List<Employ> EmployEntities = employJpa.findAll();
         return EmployEntities.stream()
                 .map(mappers::fromEmploy)
                 .collect(Collectors.toList());
@@ -36,60 +36,43 @@ public class EmployRepositoryImp implements EmployRepository {
     @Override
     public EmployModel saveEmploy(EmployModel Employ) {
         Employ EmployEntity = mappers.toEmployModels(Employ);
-        Employ savedEntity = EmployJpa.save(EmployEntity);
+        Employ savedEntity = employJpa.save(EmployEntity);
         return mappers.fromEmploy(savedEntity);
     }
 
     @Override
-    public EmployModel updateEmploy(EmployModel Employ) {
-//        if (EmployJpa.findByDocument((long) Employ.getDocument())) {
-//            Employ EmployEntity = mappers.toEmployModels(Employ);
-//            Employ updatedEntity = EmployJpa.save(EmployEntity);
-//            return mappers.fromEmploy(updatedEntity);
-//        }
-//        throw new EntityNotFoundException("Employ not found with id: " + Employ.getDocument());
-  }
+    public EmployModel updateEmploy(EmployModel employModel) {
+        if (employModel == null) {
+            throw new IllegalArgumentException("Employee model cannot be null");
+        }
+
+        String document = employModel.getDocument();
+        if (!employJpa.findByDocument(document).isPresent()) {
+            throw new EntityNotFoundException("Employee not found with document: " + document);
+        }
+
+        Employ employEntity = mappers.toEmployModels(employModel);
+        Employ updatedEntity = employJpa.save(employEntity);
+        return mappers.fromEmploy(updatedEntity);
+    }
+
 
     @Override
-    public void deleteEmploy(Long document) {
-        if (EmployJpa.existsById(document)) {
-            EmployJpa.deleteById(document);
-        } else {
-            throw new EntityNotFoundException("Employ not found with id: " + document);
-        }
+    public void deleteEmploy(String document) {
+        Employ findByDocument = employJpa.findByDocument(document)
+                .orElseThrow(() -> new EntityNotFoundException("Employ not found with id: " + document));
+        employJpa.delete(findByDocument);
     }
+
 
     @Override
     public Optional<EmployModel> findByDocument(String document) {
-        return EmployJpa.findByDocument(())
-                .map(mappers::fromEmploy)
-                .orElseThrow(() -> new EntityNotFoundException("Employ not found with id: " + document));
+        if (document == null || document.trim().isEmpty()) {
+            throw new IllegalArgumentException("Document number cannot be null or empty");
+        }
+
+        return employJpa.findByDocument(document)
+                .map(mappers::fromEmploy);
     }
 }
-
-//    @Override
-//    public List<EmployModel> getEmployes() {
-//        return List.of();
-//    }
-//
-//    @Override
-//    public EmployModel saveEmploy(EmployModel Employ) {
-//        return null;
-//    }
-//
-//    @Override
-//    public EmployModel updateEmploy(EmployModel Employ) {
-//        return null;
-//    }
-//
-//    @Override
-//    public EmployModel getEmployById(Long document) {
-//        return null;
-//    }
-//
-//    @Override
-//    public void deleteEmploy(Long document) {
-//
-//    }
-
 

@@ -37,6 +37,7 @@ public class Boss {
     private LocalDate createDate;
     @Column(name= "fecha_actualizacion")
     private LocalDate updateDate;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "boss")
     private List<Employ> employs;
 

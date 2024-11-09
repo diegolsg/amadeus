@@ -8,6 +8,7 @@ import com.amadeus.horas_extras.adapter.daos.jpa.HoursJpaRepository;
 import com.amadeus.horas_extras.adapter.daos.mapper.HoursExtraMappers;
 import com.amadeus.horas_extras.domain.model.ExtrasHoursModel;
 import com.amadeus.horas_extras.domain.port.repository.ExtraHoursRepository;
+import com.amadeus.horas_extras.domain.port.service.CalculateHoursService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,12 @@ public class ExtraHoursRepositoryImp implements ExtraHoursRepository {
     private HoursJpaRepository hoursJpaRepository;
     private EmployJpaRepository employRepository;
     private HoursExtraMappers mappers;
-    private CalculateHours calculateHours;
+    private CalculateHoursService calculateHours;
     @Autowired
     public ExtraHoursRepositoryImp(HoursJpaRepository hoursJpaRepository,
                                    EmployJpaRepository employRepository,
                                    HoursExtraMappers mappers,
-                                   CalculateHours calculateHours) {
+                                   CalculateHoursService calculateHours) {
         this.hoursJpaRepository = hoursJpaRepository;
         this.employRepository = employRepository;
         this.mappers = mappers;

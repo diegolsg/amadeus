@@ -1,4 +1,4 @@
-package com.amadeus.horas_extras.adapter.daos.repositoryImp;
+package com.amadeus.horas_extras.domain.port.service;
 
 import com.amadeus.horas_extras.adapter.api.dtos.ExtraHoursDto;
 import com.amadeus.horas_extras.adapter.daos.entity.ExtraHours;
@@ -15,13 +15,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
-public class CalculateHours {
+public class CalculateHoursService {
 
     private HoursJpaRepository hoursJpaRepository;
     private EmployJpaRepository employRepository;
     private HoursExtraMappers mappers;
+
+
     @Autowired
-    public CalculateHours(HoursJpaRepository hoursJpaRepository, EmployJpaRepository employRepository, HoursExtraMappers mappers) {
+    public CalculateHoursService(HoursJpaRepository hoursJpaRepository,
+                                 EmployJpaRepository employRepository,
+                                 HoursExtraMappers mappers) {
         this.hoursJpaRepository = hoursJpaRepository;
         this.employRepository = employRepository;
         this.mappers = mappers;
@@ -44,6 +48,7 @@ public class CalculateHours {
         int intervaloMinutos = 1;
         for (LocalDateTime fechaActual = startHour; fechaActual.isBefore(endHour); fechaActual = fechaActual.plusMinutes(intervaloMinutos)) {
             DayOfWeek dayWeek = fechaActual.getDayOfWeek();
+            LocalDate date = fechaActual.toLocalDate();
             int h = fechaActual.getHour();
             if (h < 6 || h >= 21) {
                 if (dayWeek.name().equals("SUNDAY")) {
@@ -59,20 +64,21 @@ public class CalculateHours {
                 }
             }
         }
-            entity.setDayTimeHours(Double.parseDouble(convertToFractionalHours(hourDay).replace(",", ".")));
-            entity.setNightTimeHours(Double.parseDouble(convertToFractionalHours(hourNigth).replace(",", ".")));
-            entity.setDayHolidayHours(Double.parseDouble(convertToFractionalHours(hourDayHoliday).replace(",", ".")));
-            entity.setNightHolidayHours(Double.parseDouble(convertToFractionalHours(hourNigthHoliday).replace(",", ".")));
-           // entity.setValueday(entity.getEmploys().getSalary()/(30.0)/(8.0)*(2.0)*(0.35));
-            entity.setUpdateDate(LocalDate.now());
-            ExtraHours savedEntity = hoursJpaRepository.save(entity);
+        entity.setDayTimeHours(Double.parseDouble(convertToFractionalHours(hourDay).replace(",", ".")));
+        entity.setNightTimeHours(Double.parseDouble(convertToFractionalHours(hourNigth).replace(",", ".")));
+        entity.setDayHolidayHours(Double.parseDouble(convertToFractionalHours(hourDayHoliday).replace(",", ".")));
+        entity.setNightHolidayHours(Double.parseDouble(convertToFractionalHours(hourNigthHoliday).replace(",", ".")));
+        // entity.setValueday(entity.getEmploys().getSalary()/(30.0)/(8.0)*(2.0)*(0.35));
+        entity.setUpdateDate(LocalDate.now());
+        ExtraHours savedEntity = hoursJpaRepository.save(entity);
 
-            return mappers.fromExtraHours(savedEntity);
-        }
+        return mappers.fromExtraHours(savedEntity);
+    }
 
-        public String convertToFractionalHours ( int totalMinutes){
-            double hours = totalMinutes / 60.0;
-            return String.format("%.2f", hours);  // Muestra el valor con dos decimales
-        }
+
+    public String convertToFractionalHours ( int totalMinutes){
+        double hours = totalMinutes / 60.0;
+        return String.format("%.2f", hours);  // Muestra el valor con dos decimales
+    }
 
 }

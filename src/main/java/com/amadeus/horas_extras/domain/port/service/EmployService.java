@@ -1,16 +1,22 @@
 package com.amadeus.horas_extras.domain.port.service;
 
 
+import com.amadeus.horas_extras.adapter.daos.entity.OurUsers;
 import com.amadeus.horas_extras.adapter.daos.repositoryImp.EmployRepositoryImp;
 import com.amadeus.horas_extras.domain.model.EmployModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
-public class EmployService {
-    private EmployRepositoryImp repository;
+public class EmployService implements UserDetailsService {
+
+    private final EmployRepositoryImp repository;
 
     @Autowired
     public EmployService(EmployRepositoryImp repository) {
@@ -21,8 +27,8 @@ public class EmployService {
         return repository.getEmployes();
     }
 
-    public EmployModel saveEmploy(EmployModel Employ) {
-        return repository.saveEmploy(Employ);
+    public EmployModel saveEmploy(EmployModel employ) {
+        return repository.saveEmploy(employ);
     }
 
     public EmployModel updateEmploy(EmployModel employModel) {
@@ -35,5 +41,16 @@ public class EmployService {
 
     public Optional<EmployModel> findByDocument(String document) {
         return repository.findByDocument(document);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username)throws UsernameNotFoundException {
+// Cambia "findByDocument" a "findByEmail" si el email es el identificador único
+        Optional<EmployModel> userOptional = repository.findByDocument(username);
+        return (UserDetails) userOptional.orElseThrow(() -> newUsernameNotFoundException("User not found"));
+    }
+
+    private RuntimeException newUsernameNotFoundException(String userNotFound) {
+        return null;
     }
 }

@@ -29,6 +29,8 @@ public interface HoursExtraMappers {
             @Mapping(source = "valueNightHolidayHours",target = "valueNightHolidayHours"),
             @Mapping(source = "valueday",target = "valueday"),
             @Mapping(source = "totalHoursValue",target = "totalHoursValue"),
+            @Mapping(source = "observation",target = "observation"),
+            @Mapping(source = "employs",target = "employs"),
             @Mapping(source = "createDate",target = "createDate"),
             @Mapping(source = "updateDate",target = "updateDate")
     })

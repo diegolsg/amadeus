@@ -1,15 +1,13 @@
 package com.amadeus.horas_extras.adapter.daos.mapper;
 
 import com.amadeus.horas_extras.adapter.daos.entity.Employ;
-import com.amadeus.horas_extras.adapter.daos.entity.Position;
 import com.amadeus.horas_extras.domain.model.EmployModel;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-import javax.xml.transform.Source;
-import java.math.BigDecimal;
+
 
 
 @Mapper(componentModel = "spring")

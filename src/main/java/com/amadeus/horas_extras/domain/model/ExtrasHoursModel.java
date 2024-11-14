@@ -30,6 +30,7 @@ public class ExtrasHoursModel {
     private Double valueday;
     private Double totalHoursValue;
     private String observation;
+    private Employ employs;
     private LocalDate createDate;
     private LocalDate updateDate;
 

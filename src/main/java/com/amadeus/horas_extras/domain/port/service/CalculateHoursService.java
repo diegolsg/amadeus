@@ -2,9 +2,11 @@ package com.amadeus.horas_extras.domain.port.service;
 
 import com.amadeus.horas_extras.adapter.api.dtos.ExtraHoursDto;
 import com.amadeus.horas_extras.adapter.daos.entity.ExtraHours;
+import com.amadeus.horas_extras.adapter.daos.jpa.ConfigHoursJpaRepository;
 import com.amadeus.horas_extras.adapter.daos.jpa.EmployJpaRepository;
 import com.amadeus.horas_extras.adapter.daos.jpa.HoursJpaRepository;
 import com.amadeus.horas_extras.adapter.daos.mapper.HoursExtraMappers;
+import com.amadeus.horas_extras.domain.model.EmployModel;
 import com.amadeus.horas_extras.domain.model.ExtrasHoursModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ public class CalculateHoursService {
     private HoursJpaRepository hoursJpaRepository;
     private EmployJpaRepository employRepository;
     private HoursExtraMappers mappers;
+    private ConfigHoursJpaRepository configHoursJpaRepository;
 
 
     @Autowired
@@ -39,11 +42,9 @@ public class CalculateHoursService {
         LocalDateTime startHour = extraHoursDto.getStartHours();
         LocalDateTime endHour = extraHoursDto.getEndHours();
 
-
         ExtraHours entity = new ExtraHours();
         entity.setStartHours(startHour);
         entity.setEndHours(endHour);
-
 
         int intervaloMinutos = 1;
         for (LocalDateTime fechaActual = startHour; fechaActual.isBefore(endHour); fechaActual = fechaActual.plusMinutes(intervaloMinutos)) {
@@ -79,6 +80,11 @@ public class CalculateHoursService {
     public String convertToFractionalHours ( int totalMinutes){
         double hours = totalMinutes / 60.0;
         return String.format("%.2f", hours);  // Muestra el valor con dos decimales
+    }
+
+    public Double getDayValue(String document){
+       // EmployModel employModel =
+        return null;
     }
 
 }

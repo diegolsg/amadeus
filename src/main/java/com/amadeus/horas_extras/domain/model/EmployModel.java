@@ -2,11 +2,10 @@ package com.amadeus.horas_extras.domain.model;
 
 
 import com.amadeus.horas_extras.adapter.daos.entity.Position;
-import jakarta.persistence.Column;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data

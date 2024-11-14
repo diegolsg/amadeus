@@ -45,7 +45,7 @@ public class ExtraHours {
    @Column(name = "totalDeHoras")
     private Float totalHoursValue;
    @Column(name="observaciones")
-   private String observaciones;
+   private String observation;
     @Column(name = "fecha_creacion")
     private LocalDate createDate;
     @Column(name= "fecha_actualizacion")

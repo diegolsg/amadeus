@@ -1,14 +1,13 @@
 package com.amadeus.horas_extras.adapter.daos.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -23,16 +22,29 @@ public class Employ {
     @Column(name = "nombre")
     private String name;
     @Column(name = "apellido")
-    private String lastname;
+    private String lastName;
     @Column(name = "correo")
-    private String mail;
+    private String email;
     @Column(name = "numero_telefono")
     private String numberTelephone;
     @Column(name = "cargo")
-    private String position;
+    private Position position;
     @Column(name = "salario")
-    private BigDecimal salary;
+    private Double salary;
+    @Column(name="usuario")
+    private String user;
+    private String password;
     private String area;
+    @Column(name = "fecha_creacion")
+    private LocalDate createDate;
+    @Column(name= "fecha_actualizacion")
+    private LocalDate updateDate;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employs")
+    private List<ExtraHours> extraHours;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Boss boss;
 
 
 }

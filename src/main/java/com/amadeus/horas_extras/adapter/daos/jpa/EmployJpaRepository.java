@@ -3,8 +3,11 @@ package com.amadeus.horas_extras.adapter.daos.jpa;
 import com.amadeus.horas_extras.adapter.daos.entity.Employ;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+
+
+import java.util.Optional;
 
 public interface EmployJpaRepository extends JpaRepository<Employ,String> {
-    List<Employ> findByDocument(String document);
+    Optional<Employ> findByDocument(String documento);
+
 }

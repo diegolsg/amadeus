@@ -1,15 +1,14 @@
 package com.amadeus.horas_extras.adapter.daos.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,6 +18,7 @@ import java.time.LocalDateTime;
 
 public class ExtraHours {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
    @Column(name = "horainicio")
     private LocalDateTime startHours ;
@@ -41,9 +41,20 @@ public class ExtraHours {
    @Column(name = "valorHoraFestivaNocturna")
     private BigDecimal valueNightHolidayHours;
    @Column(name = "valorDia")
-    private BigDecimal valueday;
+    private Double valueday;
    @Column(name = "totalDeHoras")
-    private Float totalHours;
+    private Float totalHoursValue;
+   @Column(name="observaciones")
+   private String observation;
+    @Column(name = "fecha_creacion")
+    private LocalDate createDate;
+    @Column(name= "fecha_actualizacion")
+    private LocalDate updateDate;
 
+   @ManyToOne(fetch = FetchType.LAZY)
+    private Employ employs;
+
+   @OneToOne(fetch = FetchType.LAZY)
+    private ConfigHours configHours;
 
 }

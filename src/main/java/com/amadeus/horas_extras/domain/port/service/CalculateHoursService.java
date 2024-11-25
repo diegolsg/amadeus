@@ -1,6 +1,7 @@
 package com.amadeus.horas_extras.domain.port.service;
 
 import com.amadeus.horas_extras.adapter.api.dtos.ExtraHoursDto;
+import com.amadeus.horas_extras.adapter.daos.entity.Employ;
 import com.amadeus.horas_extras.adapter.daos.entity.ExtraHours;
 import com.amadeus.horas_extras.adapter.daos.jpa.ConfigHoursJpaRepository;
 import com.amadeus.horas_extras.adapter.daos.jpa.EmployJpaRepository;
@@ -12,9 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class CalculateHoursService {
@@ -42,7 +46,7 @@ public class CalculateHoursService {
         LocalDateTime startHour = extraHoursDto.getStartHours();
         LocalDateTime endHour = extraHoursDto.getEndHours();
 
-        ExtraHours entity = new ExtraHours();
+        ExtrasHoursModel entity = new ExtrasHoursModel();
         entity.setStartHours(startHour);
         entity.setEndHours(endHour);
 
@@ -69,9 +73,12 @@ public class CalculateHoursService {
         entity.setNightTimeHours(Double.parseDouble(convertToFractionalHours(hourNigth).replace(",", ".")));
         entity.setDayHolidayHours(Double.parseDouble(convertToFractionalHours(hourDayHoliday).replace(",", ".")));
         entity.setNightHolidayHours(Double.parseDouble(convertToFractionalHours(hourNigthHoliday).replace(",", ".")));
-        // entity.setValueday(entity.getEmploys().getSalary()/(30.0)/(8.0)*(2.0)*(0.35));
         entity.setUpdateDate(LocalDate.now());
-        ExtraHours savedEntity = hoursJpaRepository.save(entity);
+        entity.setCreateDate(LocalDate.now());
+        entity.setDocumentNumber(extraHoursDto.getDocumentEmploy());
+        entity.setValuedayhours(getDayValue(extraHoursDto.getDocumentEmploy()));
+        entity.setObservation(extraHoursDto.getObservation());
+        ExtraHours savedEntity = hoursJpaRepository.save(mappers.toExtraHoursModels(entity));
 
         return mappers.fromExtraHours(savedEntity);
     }
@@ -82,9 +89,25 @@ public class CalculateHoursService {
         return String.format("%.2f", hours);  // Muestra el valor con dos decimales
     }
 
-    public Double getDayValue(String document){
-       // EmployModel employModel =
-        return null;
+    public BigDecimal getDayValue(String document) {
+
+        Optional<Employ> employOptional = employRepository.findByDocument(document);
+        if (employOptional.isEmpty()) {
+            throw new IllegalArgumentException("No se encontró un empleado con el documento proporcionado.");
+        }
+
+        Employ employ = employOptional.get();
+        if (employ.getSalary() == null || employ.getSalary() <= 0) {
+            throw new IllegalArgumentException("El salario del empleado es inválido.");
+        }
+
+        BigDecimal monthlySalary = BigDecimal.valueOf(employ.getSalary());
+        BigDecimal dailyValue = monthlySalary.divide(BigDecimal.valueOf(230), 2, RoundingMode.HALF_UP);
+
+        return dailyValue;
     }
+
+
+
 
 }

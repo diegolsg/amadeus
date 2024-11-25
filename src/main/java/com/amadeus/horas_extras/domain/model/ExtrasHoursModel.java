@@ -33,6 +33,6 @@ public class ExtrasHoursModel {
     private Employ employs;
     private LocalDate createDate;
     private LocalDate updateDate;
-
+    private String documentNumber;
 
 }

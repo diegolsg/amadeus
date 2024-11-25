@@ -51,7 +51,8 @@ public class ExtraHours {
     @Column(name= "fecha_actualizacion")
     private LocalDate updateDate;
 
-   @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "employs_documento", referencedColumnName = "document") // Ajusta el nombre si es necesario
     private Employ employs;
 
    @OneToOne(fetch = FetchType.LAZY)

@@ -20,4 +20,5 @@ public class ConfigHoursModel {
     private Time endHourDay;
     private LocalDate createDate;
     private LocalDate updateDate;
+
 }

@@ -14,5 +14,6 @@ public class ExtraHoursDto {
     private LocalDateTime startHours ;
     private LocalDateTime endHours ;
     private String documentEmploy;
+    private String observation;
 
 }

@@ -32,7 +32,8 @@ public interface HoursExtraMappers {
             @Mapping(source = "observation",target = "observation"),
             @Mapping(source = "employs",target = "employs"),
             @Mapping(source = "createDate",target = "createDate"),
-            @Mapping(source = "updateDate",target = "updateDate")
+            @Mapping(source = "updateDate",target = "updateDate"),
+            @Mapping(source = "documentNumber", target = "employs.document")
     })
     ExtraHours toExtraHoursModels(ExtrasHoursModel extrasHoursModel);
     @InheritInverseConfiguration
